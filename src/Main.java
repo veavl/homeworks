@@ -6,19 +6,19 @@ public class Main {
 
     static boolean have_task = true;
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         while (have_task) {
             process();
         }
     }
 
-    public static void process() {
+    public static void process() throws IOException {
         Scanner str_input = new Scanner(System.in);
         System.out.println("Input:");
         System.out.println(calc(str_input.nextLine())); // the calc()
     }
 
-    public static String calc(String input) {
+    public static String calc(String input) throws IOException {
 
         String[] numbers = input.split(" ");
         String[] romanNumbers = {"I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X"};
@@ -45,13 +45,7 @@ public class Main {
         String operator = numbers[1];
         boolean foundOperator = Arrays.asList(operators).contains(operator); // преобразуем массив в список и проверяем наличие элемента
         if (!foundOperator) {
-            try {
-                throw new IOException();
-            }
-            catch (IOException e){
-                System.out.println("Программа завершена: выражение не является математической операцией: (+, -, /, *)");
-                System.exit(0);
-            }
+            throw new IOException("Программа завершена: выражение не является математической операцией: (+, -, /, *)");
         }
 
         // 2. Получаем введенные числа и проверяем их наличие в массиве allNumbers
@@ -103,26 +97,14 @@ public class Main {
                 } else if (operator.equals(minus)) {
                     result = num1 - num2;
                     if (result <= 0) {
-                        try {
-                            throw new IOException();
-                        }
-                        catch (IOException e){
-                            System.out.println("Программа завершена: в римской системе нет отрицательных чисел");
-                            System.exit(0);
-                        }
+                            throw new IOException("Программа завершена: в римской системе нет отрицательных чисел");
                     }
                     resultStr = Integer.toString(result);
                     input = IntToRoman(resultStr);
                 }
             } // Римское - Арабское
             else {
-                try {
-                    throw new IOException();
-                }
-                catch (IOException e){
-                    System.out.println("Программа завершена: используются одновременно разные системы счисления");
-                    System.exit(0);
-                }
+                throw new IOException("Программа завершена: используются одновременно разные системы счисления");
             }
         // Нет в массиве allNumbers
         } else {
