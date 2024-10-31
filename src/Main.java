@@ -2,7 +2,7 @@ import java.util.Scanner;
 import java.util.Arrays;
 import java.io.IOException;
 
-public class Main {
+public class Main {     // add comment 31.10.2024
 
     static boolean have_task = true;
 
